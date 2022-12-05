@@ -19,8 +19,8 @@ In order to get our application going, we'll first need to do a few things:
 
 - Create our database
   - `createdb flask_assocs`
+  - Our migrations have already been initialized, so we don't need to run `flask db init`
 - Next we'll need to set up and run our migrations
-  - `flask db init`
   - `flask db upgrade`
 
 ### Defining Relationships
@@ -63,7 +63,7 @@ Now that we've set up the `Foreign Key` on our `Task` model, we can tell the `Us
 Let's add the following line to the bottom of the attributes for our `User` model:
 
 ```py
-tasks = db.relationship("Task", cascade='all', back_populates="user")
+tasks = db.relationship("Task", cascade="all", back_populates="user")
 ```
 
 Take notice that here we are using `tasks` as the property. This is so we can read our code and understand what kind of relationship this should be. When querying for tasks belonging to a user, we want to have a list being returned.
@@ -147,7 +147,7 @@ The request body should follow the following format:
 ```json
 {
   "content": "<str>",
-  "user_id": "<int>"
+  "user_id": <int>
 }
 ```
 
